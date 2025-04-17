@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Théories de la Communication</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #C00000; /* Strong Red */
+            --secondary-color: #FFFDF5; /* Off-white */
+            --text-color: #222222; /* Dark Gray/Black */
+            --border-color: #E0E0E0; /* Light Gray for subtle borders */
+            --accent-color: #F0A0A0; /* Lighter red for accents if needed */
+            --grid-color: rgba(0, 0, 0, 0.1);
+
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: #f0f0f0; /* Background outside the page */
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 0; /* Add padding top/bottom for scroll */
+            min-height: 100vh;
+        }
+
+        /* Magazine Cover Page */
+        .magazine-cover {
+            width: 210mm;
+            height: 297mm;
+            background-color: var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+            linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+            background-size: 20mm 20mm;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .theorists-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .theorist-portrait {
+            fill: var(--text-color);
+            opacity: 0.15;
+        }
+
+        .cover-header {
+            padding: 4rem 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .issue-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 5rem;
+            line-height: 1;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .title-top, .title-bottom {
+            display: block;
+        }
+
+        .title-bottom {
+            margin-top: -0.5rem;
+        }
+
+        .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            color: var(--text-color);
+        }
+
+        .feature-text {
+            position: absolute;
+            bottom: 30%;
+            left: 3rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .cover-footer {
+            position: absolute;
+            bottom: 2rem;
+            left: 3rem;
+            right: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+        }
+
+        .barcode {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .barcode svg {
+            width: 100px;
+            height: 30px;
+        }
+
+        /* Report Page */
+        .page {
+            background-color: var(--secondary-color);
+            width: 210mm; /* A4 width */
+            min-height: 297mm; /* A4 height */
+            padding: 25mm 20mm; /* Typical A4 margins */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color); /* Subtle border */
+            display: flex;
+            flex-direction: column;
+            gap: 1rem; /* Spacing between sections */
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+            margin-bottom: 0.75em;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 0.25em;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.2em;
+            display: inline-block; /* Make border only as wide as text */
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--text-color);
+            font-weight: bold; /* Use Montserrat bold for h3 */
+            font-family: var(--font-body);
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        strong {
+            font-weight: 700;
+        }
+
+        em {
+            font-style: italic;
+        }
+
+        ul {
+            list-style: none; /* Remove default bullets */
+            padding-left: 0;
+            margin-bottom: 1em;
+        }
+
+        ul li {
+            padding-left: 1.5em; /* Indentation */
+            position: relative;
+            margin-bottom: 0.5em;
+        }
+
+        /* Custom bullet points */
+        ul li::before {
+            content: '■'; /* Square bullet */
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 0.8em; /* Adjust size */
+        }
+
+        .divider {
+            border: none;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 1.5rem 0;
+        }
+
+        .divider.short {
+            width: 30%; /* Make some dividers shorter */
+            margin: 1.5rem auto; /* Center align short dividers */
+            background-color: var(--border-color); /* Make short dividers lighter */
+            height: 1px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        header .divider {
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem; /* Less space after header divider */
+        }
+
+        .note {
+            background-color: #f8f8f8; /* Slightly different background */
+            border-left: 4px solid var(--primary-color);
+            padding: 0.8rem 1rem;
+            margin-top: 1rem;
+            font-size: 0.9em;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9em;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+        }
+
+        thead {
+            background-color: #f1f1f1; /* Light grey header */
+            color: var(--text-color);
+            font-weight: bold;
+            font-family: var(--font-body);
+        }
+
+        thead th {
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #fafafa; /* Subtle striping */
+        }
+
+        tfoot {
+            background-color: #f1f1f1;
+            font-weight: bold;
+        }
+
+        tfoot td {
+            text-align: right;
+            border-top: 2px solid var(--primary-color);
+        }
+        
+        tfoot td:last-child {
+            text-align: right;
+        }
+
+        footer {
+            margin-top: auto; /* Push footer to the bottom */
+            padding-top: 1rem;
+            font-size: 0.8em;
+            text-align: center;
+            color: #777;
+        }
+
+        footer .divider {
+            background-color: var(--border-color);
+            height: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* PDF Optimizations */
+        /* Setting proper page dimensions and breaks */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background: none;
+            }
+
+            .magazine-cover, .page {
+                width: 100%;
+                height: 100%;
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                padding: 0;
+                page-break-after: always;
+                break-after: page;
+            }
+
+            .magazine-cover {
+                padding: 0;
+                display: block;
+                position: relative;
+                height: 100vh;
+            }
+
+            .page {
+                padding: 25mm 20mm;
+                height: 100vh;
+            }
+
+            /* Ensure backgrounds and colors print */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* Hide elements not needed in print */
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* Screen-only styles */
+        @media screen {
+            body {
+                padding: 2rem 0;
+            }
+            
+            .magazine-cover, .page {
+                margin-bottom: 2rem;
+            }
+            
+            /* Download button styling */
+            .download-btn {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background-color: var(--primary-color);
+                color: white;
+                border: none;
+                border-radius: 4px;
+                padding: 10px 20px;
+                font-family: var(--font-body);
+                font-weight: 700;
+                cursor: pointer;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                z-index: 100;
+            }
+            
+            .download-btn:hover {
+                background-color: #a00000;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 850px) {
+            body {
+                padding: 1rem 0;
+            }
+            
+            .magazine-cover, .page {
+                width: 95%;
+                min-height: 0; /* Allow height to adjust */
+                height: auto;
+            }
+            
+            .magazine-cover {
+                aspect-ratio: 210/297;
+            }
+            
+            .page {
+                padding: 15mm 10mm;
+            }
+            
+            .main-title {
+                font-size: calc(3rem + 2vw);
+            }
+            
+            .concept-grid {
+                grid-template-columns: 1fr; /* Stack on smaller screens */
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- First Page: Magazine Cover -->
+    <div class="magazine-cover">
+        <div class="grid-overlay"></div>
+        
+        <div class="theorists-bg">
+            <svg class="theorist-portrait" viewBox="0 0 100 100">
+                <circle cx="50" cy="40" r="30"/>
+                <rect x="30" y="70" width="40" height="50"/>
+            </svg>
+        </div>
+
+        <header class="cover-header">
+            <div class="issue-info">
+                <span class="issue-number">№ 16/04</span>
+                <span class="issue-year">2025</span>
+            </div>
+            
+            <h1 class="main-title">
+                <span class="title-top">LES THÉORIES</span>
+                <span class="title-bottom">DE LA COMMUNICATION</span>
+            </h1>
+            
+            <h2 class="subtitle">Rapport de séance</h2>
+        </header>
+
+        <div class="feature-text">
+            <p>SHANNON • WEAVER • LASSWELL • JAKOBSON • GOFFMAN • PALO ALTO</p>
+        </div>
+
+        <footer class="cover-footer">
+            <div class="barcode">
+                <svg viewBox="0 0 100 30">
+                    <rect x="0" y="0" width="5" height="30"/>
+                    <rect x="10" y="0" width="2" height="30"/>
+                    <rect x="15" y="0" width="3" height="30"/>
+                    <rect x="25" y="0" width="4" height="30"/>
+                    <rect x="35" y="0" width="1" height="30"/>
+                    <rect x="40" y="0" width="5" height="30"/>
+                </svg>
+                <span>ISBN 978-0-000000-0-0</span>
+            </div>
+            <div class="footer-text">
+                Travail de groupe • Design & Communication • 2025
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Second Page: Report -->
+    <div class="page">
+        <header>
+            <h1>Rapport de séance – 16 avril 2025</h1>
+            <hr class="divider">
+        </header>
+
+        <section>
+            <h2>Objectif de la séance</h2>
+            <p>La séance d'aujourd'hui a été entièrement consacrée à l'avancement du <strong>travail de design</strong> du projet. Nous avons veillé à ce que toutes les parties intégrées soient <strong>pertinentes</strong> et cohérentes avec l'idée générale. L'accent a été mis sur la rigueur et la précision dans l'élaboration de la maquette.</p>
+        </section>
+
+        <hr class="divider short">
+
+        <section>
+            <h2>Répartition des interventions orales</h2>
+            <p>Les membres du groupe ont poursuivi la préparation de leurs présentations respectives. Voici la répartition :</p>
+            <ul>
+                <li><strong>Zineb Bnichou</strong> : Introduction aux différentes théories de la communication</li>
+                <li><strong>Aya Ayat et Sara Sidane</strong> : Théorie de Shannon et Weaver (3 minutes chacune)</li>
+                <li><strong>Amine El Melagui</strong> : Modèle de Lasswell (3 minutes)</li>
+                <li><strong>Nada Tahil et Meryem Kiyouch</strong> : Théorie de Roman Jakobson (3 minutes chacune)</li>
+                <li><strong>El Aidous Yassine</strong> : École de Palo Alto (3 minutes)</li>
+                <li><strong>Achmharou Younes</strong> : Théorie d'Erving Goffman (3 minutes)</li>
+            </ul>
+            <p class="note"><strong>Remarque importante pour la prochaine séance</strong> : Il est impératif que chaque intervenant respecte le temps imparti. L'investissement accordé à la réalisation du design doit désormais être équilibré par une <strong>maîtrise parfaite du script et du temps de parole</strong>.</p>
+        </section>
+
+        <hr class="divider short">
+
+        <section>
+            <h2>Concept du projet : <em>« Des fenêtres sur la communication »</em></h2>
+            <div class="concept-grid">
+                <div>
+                    <h3>Idée centrale</h3>
+                    <p>L'idée générale du projet repose sur l'ouverture de <strong>fenêtres symboliques</strong> dans un univers marqué par des conflits issus des malentendus en communication. Chaque fenêtre représente une théorie, soulignant les divers angles d'approche de la communication humaine.</p>
+                </div>
+                <div>
+                    <h3>La maquette</h3>
+                    <p>Nous avons conçu une <strong>scène en forme de théâtre</strong>, où chaque théorie est matérialisée sous forme de fenêtre. Le titre du projet est positionné au centre de la maquette afin de fédérer l'ensemble des éléments.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider short">
+
+        <section>
+            <h2>Avancement réalisé durant la séance</h2>
+            <ul>
+                <li>Lancement de la <strong>réalisation des prototypes</strong></li>
+                <li>Mise en place et assemblage de <strong>l'ensemble des éléments graphiques</strong></li>
+            </ul>
+
+            <h3>Contributions individuelles</h3>
+            <ul>
+                <li><strong>Sara</strong> : Documentation du processus, découpage des éléments imprimés pour la création des fanions, conception des visuels.</li>
+                <li><strong>Younes</strong> : Calcul des marges et des bordures pour chaque image afin d'assurer une harmonie visuelle dans la maquette.</li>
+                <li><strong>Yassine</strong> (<em>auteur du présent rapport</em>) : Rédaction du compte rendu et approvisionnement en matériel (carton, bois, papier).</li>
+                <li><strong>Zineb et Meryem</strong> : Achat de la colle en papeterie, participation active à la conception et à la réalisation de la maquette.</li>
+            </ul>
+        </section>
+
+        <hr class="divider short">
+
+        <section>
+            <h2>Dépenses</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Article</th>
+                        <th>Quantité</th>
+                        <th>Prix unitaire (Dhs)</th>
+                        <th>Total (Dhs)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Feuilles A4 imprimées</td>
+                        <td>3</td>
+                        <td>1,5</td>
+                        <td>4,5</td>
+                    </tr>
+                    <tr>
+                        <td>Papier noir peint</td>
+                        <td>2</td>
+                        <td>7</td>
+                        <td>14</td>
+                    </tr>
+                    <tr>
+                        <td>Bâton de colle</td>
+                        <td>1</td>
+                        <td>10</td>
+                        <td>10</td>
+                    </tr>
+                     <tr>
+                        <td>Feuilles A4 bleues</td>
+                        <td>5</td>
+                        <td>2</td>
+                        <td>10</td>
+                    </tr>
+                     <tr>
+                        <td>Feuilles A4 blanches</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"><strong>Total général</strong></td>
+                        <td><strong>31,5 Dhs</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <footer>
+            <hr class="divider">
+            Rapport généré le 16/04/2025
+        </footer>
+    </div>
+
+    <!-- Print Button (only shows on screen, not in print) -->
+    <button class="download-btn no-print" onclick="window.print()">Télécharger PDF</button>
+
+    <script>
+        // This script helps ensure proper PDF rendering
+        document.addEventListener('DOMContentLoaded', function() {
+            // Force load of background images and styles
+            setTimeout(function() {
+                document.body.style.visibility = 'visible';
+            }, 200);
+        });
+    </script>
+</body>
+</html>
